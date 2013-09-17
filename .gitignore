@@ -39,7 +39,6 @@ Release
 # Standard Python ignores
 #
 ######################################################
-
 *.py[cod]
 
 # C extensions
