@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% from 'base.html' import flash %}
+
+{%block title %}Packages List{%endblock %}
+
+{%block content %}
+<article class="eleven columns">
+    <hgroup>
+        <h2>Winsync Packages</h2>
+    </hgroup>
+    
+    {{ flash() }}
+    
+    <section style="text-align:center">
+        <div>
+            <a class="button full-width" style="font-size:large"
+               style="text-decoration:none" href="/package/new">Create A Package</a>
+        </div>
+    </section>
+
+    <section>
+        <hgroup>
+            <h3>Installed Packages</h3>
+        </hgroup>
+        
+        <p>Below you will find a list of all the packages found on your system.
+        Click the link to view and update the package's information.</p>
+        {%for id, name in package_list %}
+            <div class="three columns cell"><a href="/package/{{id}}">{{name}}</a></div>
+        {%endfor %}
+    </section>
+</article>
+{%endblock content %}

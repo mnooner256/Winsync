@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from 'base.html' import flash %}
+
+{%block title %}Login{%endblock %}
+
+{%block content %}
+<article class="eleven columns">
+    <hgroup>
+        <h2>Login</h2>
+    </hgroup>
+    
+    {{ flash() }}
+    
+    <form method="POST" action="/login">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+        
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        
+        <input type="submit" value="Login">
+    </form>
+
+</article>
+{%endblock content %}

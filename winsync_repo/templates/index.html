@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from 'base.html' import flash %}
+
+{%block content %}
+<article class="eleven columns">
+    {{ flash() }}
+
+    <p>Here is the place where you can configure winsync.</p>
+    
+    <p>The most basic component of winsync is the <em>package</em>. A package
+    has several components. First is an information file that specifies
+    things like the package's name, version, dependancies, etc. Next is an
+    <em>Installer</em> script. When the system detects that a package needs to
+    be installed, upgraded, or removed this script gets executed. The script
+    is written is plain old python. Winsync provides a number of utility
+    functions to help you perform common tasks. Finally, you can upload files
+    that will be associated with this package.</p>
+    
+    <p>For example, let us say you created a package that would install the
+    Firfox web browser. You would need upload the <tt>Firefox.exe</tt> file
+    and create a script that would execute this file.</p>
+</article>
+
+{%endblock content %}

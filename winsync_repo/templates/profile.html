@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% from 'base.html' import flash, show_package_list %}
+
+{%block title %}Profiles{%endblock %}
+
+{%block content %}
+<article class="eleven columns">
+    <hgroup>
+    {%- if id != 'new' %}
+        <h2>Update: {{profile.id|title}}</h2>
+    {%- else %}
+        <h2>Create A Profile</h2>
+    {% endif %}
+    </hgroup>
+       
+    {{ flash() }}
+    
+    <section>
+        <form method="POST" action="/profile/{{ id }}">
+            <input type="hidden" name="cur_id" value="{{ id }}">
+            <label for="id">Unique Profile ID:</label>
+            <input type="text" name="id" id="id" 
+            {%- if id != 'new' -%}
+                value="{{id}}"
+            {%- endif -%}>
+            <label for="variable">Environment Variable:</label>
+            <input type="text" name="variable" id="variable"
+                   value="{{ profile.variable }}">
+            <label for="match">Regular Expression:</label>
+            <input type="text" name="match" id="match"
+                   value="{{ profile.match }}">
+
+            {{ show_package_list( package_list, profile.packages, 'packages', 'Packages', '' ) }}
+            <input type="submit"
+            {% if id == 'new' -%}
+                value="Create Profile">
+            {% else -%}
+                value="Update Profile">
+                    <input type="submit" value="Delete Profile" formaction="/delete-profile/{{ id }}">
+            {%- endif %}
+        </form>
+    </section>
+    
+</article>
+{%endblock content %}

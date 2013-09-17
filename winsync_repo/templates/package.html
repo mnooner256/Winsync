@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% from 'base.html' import flash, show_package_list %}
+
+{% block title %}Winsync Package Details{% endblock %}
+
+{% block content %}
+<article class="eleven columns">
+    <section>
+        <hgroup>
+        {%- if name %}
+            <h2>Update: {{name}}</h2>
+        {%- else %}
+            <h2>Create A Package</h2>
+        {% endif %}
+        </hgroup>
+       
+        {{ flash() }}
+        
+        <form method="POST" enctype="multipart/form-data"
+              action="/package/{{pkg_id}}">
+            <label for="id">Unique ID:</label><input type="text" name="id" id="id" value="{%- if pkg_id != 'new' -%}{{pkg_id}}{%- endif -%}">
+            <label for="name">Package Name:</label><input type="text" name="name" id="name" value="{{name}}">
+            <label for="version">Version:</label>
+            <input type="text" name="version" id="version"
+            {%- if priority != '' -%}
+                value="{{version}}">
+            {%- else -%}
+                value="1.0">
+            {%- endif %}
+            
+            <label for="priority">Priority:</label>
+            <input type="text" name="priority" id="priority"
+            {%- if priority and priority != '': -%}
+                value="{{priority}}">
+            {%- else -%}
+                value="50">
+            {% endif -%}
+            <label for="reboot">Reboot:</label>
+            <select name="reboot" id="reboot">
+                <option value="True"
+                {%- if reboot -%}
+                    selected="selected"
+                {%- endif -%}
+                >True</option>
+                <option value="False"
+                {%- if not reboot -%}
+                    selected="selected"
+                {%- endif -%}
+                >False</option>
+            </select>
+            <label for="meta">Meta:</label>
+            <select name="meta" id="meta">
+                <option value="True"
+                {%- if meta: -%}
+                    selected="selected"
+                {%- endif -%}
+                >True</option>
+                <option value="False"
+                {%- if not meta: -%}
+                    selected="selected"
+                {% endif -%}
+                >False</option>
+            </select>
+            <label for="installer">Install Script:</label>
+            {%- if installer and installer != 'None' -%}
+                <span style="display:block">
+                    <a href="/download-installer/{{id}}">{{installer}}</a>
+                </span>
+            {%- endif -%}
+            <input type="file" name="installer" id="installer">
+            <input type="hidden" name="cur_installer" value="{{installer}}">
+            {{ show_package_list( package_list, depend, 'depend', 'Depends On Packages', id ) }}
+            {{ show_package_list( package_list, chain, 'chain', 'Chained Packages', id ) }}
+            <input type="submit"
+            {% if cur_id == 'new' -%}
+                value="Create Package">
+            {% else -%}
+                value="Update Package">
+                    <input type="submit" value="Delete Package" formaction="/delete-package/{{ id }}">
+            {%- endif %}
+        </form>
+{% if cur_id != 'new' and not meta %}
+        <p><a href="/download-info/{{ id }}">Download the package information file.</a></p>
+    </section>
+    <section>
+        <hgroup>
+            <h2>Additional Files</h2>
+        </hgroup>
+        
+        <form method="post" action="/upload/{{id}}" enctype="multipart/form-data">
+        <table>
+        {%- if files == [] -%}
+            <tr>
+                <td class="delete">&nbsp;</td><td style="padding-bottom:20px">This package has no files</td>
+            </tr>
+        {%- else -%}
+            {%- for file in files %}
+            <tr>
+                <td class="delete">
+                    <a href="/delete-file/{{id}}/{{file}}">
+                        <img src="/static/images/trash.png" class="trash">
+                    </a>
+                </td>
+                <td><a href="/download/{{id}}/{{file}}">{{file}}</a></td>
+            </tr>
+            {%- endfor %}
+        {%- endif  %}
+        </table>
+        <h3>Add File:</h3>
+        <input type="file" name="fileupload" id="fileupload">
+        <input type="submit" value="Upload">
+        </form>
+        <a href="/update-files/{{ id }}">Update</a>
+    </section>
+{% endif %}
+</article>
+{%endblock content %}

@@ -1,0 +1,24 @@
+; This is the only section needed in this file
+[repo]
+
+; This allows machines to create accounts with the server. This should be
+; disabled after the initial signup period
+allow_self_register = True
+
+; This key is used to sign session cookies. The easiest what to generate
+; this value is to run the following two lines in the python console
+; then paste the result as the value for this key:
+;   >>> import uuid
+;   >>> print(str(uuid.uuid4())+str(uuid.uuid4()))
+secret_key =
+
+; This turns on verbose exceptions, it should be turned off for production
+debug = True
+
+; When running the module as a server for testing purposes, what address
+; should it listen on.
+address = localhost
+
+; When running the module as a server for testing purposes, what port
+; should it listen on.
+port = 8080

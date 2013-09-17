@@ -1,0 +1,51 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> 	<html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	%try:
+	    <title>{{title}}</title>
+    %except:
+	    <title>Winsync</title>
+    %end
+    
+	<meta name="author" content="Michael Nooner">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+	
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="/static/stylesheets/base.css">
+	<link rel="stylesheet" href="/static/stylesheets/skeleton.css">
+	<link rel="stylesheet" href="/static/stylesheets/layout.css">
+	
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="/static/images/favicon.ico">
+	<link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/images/apple-touch-icon-114x114.png">
+	
+	<script src="/static/javascripts/jquery-1.6.1.min.js" type="text/javascript"></script>
+</head>
+<body><div class="container">
+<header class="sixteen columns">
+    <h1>Winsync Repository Manager</h1>
+</header>
+<nav class="four columns">
+    <ul>
+    	<li class="home"><a href="/">Winsync</a></li>
+        <li><a href="/list-packages">View All Packages</a></li>
+        <li><a href="/package/new">New Package</a></li>
+    </ul>
+</nav>

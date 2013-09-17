@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from 'base.html' import flash %}
+
+{%block title %}Profiles List{%endblock %}
+
+{%block content %}
+<article class="eleven columns">
+    <hgroup>
+        <h2>Winsync Profiles</h2>
+    </hgroup>
+    
+    {{ flash() }}
+    
+    <section style="text-align:center">
+        <div>
+            <a class="button full-width" style="font-size:large"
+               style="text-decoration:none" href="/profile/new">Create
+               A Profile</a>
+        </div>
+    </section>
+
+    <section>
+        <hgroup>
+            <h3>Current Profiles</h3>
+        </hgroup>
+        
+        <p>Below you will find a list of all the profiles associated with
+        Winsync Click the link to view and update the profile's
+        information.</p>
+        {%for id in profiles %}
+            <div class="three columns cell">
+                <a href="/profile/{{id}}">{{id|title}}</a>
+            </div>
+        {%endfor %}
+    </section>
+</article>
+{%endblock content %}
